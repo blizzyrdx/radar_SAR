@@ -1,0 +1,13 @@
+# Raw radar recordings
+*.bin
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+
+# Generated results
+results/
