@@ -6,6 +6,7 @@ from datetime import datetime
 from pathlib import Path
 
 from radar_session import RadarSession
+from packet_validator import validate_packets
 
 # ==========================================
 # Directories
@@ -100,6 +101,7 @@ def acquire(radar):
     if source.exists() or destination.exists():
         raise FileExistsError(filename)
 
+    # Preserve Windows backslashes
     lua_path = str(source)
 
     print(f"\nStarting acquisition: {filename}")
@@ -141,16 +143,24 @@ def acquire(radar):
 
     # Execute using persistent radar connection
     radar.send(
-    f'dofile([[{str(script)}]])',
-    timeout=60
-)
+        f'dofile([[{str(script)}]])',
+        timeout=60
+    )
 
-    # Verify processed ADC recording
+    # ======================================
+    # Verify recording size
+    # ======================================
+
     print("Verifying recorded data...")
 
     verify_capture(source)
 
+    print("File size verification: PASS")
+
+    # ======================================
     # Copy recording to project
+    # ======================================
+
     shutil.copy2(source, destination)
 
     # Verify copied file integrity
@@ -160,7 +170,12 @@ def acquire(radar):
     if source_hash != destination_hash:
         raise IOError("File copy verification failed")
 
+    print("SHA256 verification: PASS")
+
+    # ======================================
     # Preserve capture logs
+    # ======================================
+
     for log in POSTPROC_DIR.glob(name + "*"):
 
         if log.suffix.lower() in (".txt", ".csv"):
@@ -169,7 +184,31 @@ def acquire(radar):
                 OUTPUT_DIR / log.name
             )
 
-    # Display acquisition results
+    # ======================================
+    # Automatic packet integrity validation
+    # ======================================
+
+    print("\nValidating packet integrity...")
+
+    if not validate_packets(destination):
+
+        print("\n================================")
+        print("ACQUISITION REJECTED")
+        print("================================")
+
+        print("Reason: Packet integrity validation failed.")
+        print(f"Recording: {destination.name}")
+        print("Files preserved for diagnostics.")
+
+        raise RuntimeError(
+            "Recording rejected due to packet loss "
+            "or unexpected packet statistics."
+        )
+
+    # ======================================
+    # Display successful acquisition results
+    # ======================================
+
     print("\n================================")
     print("ACQUISITION SUCCESSFUL")
     print("================================")
@@ -178,6 +217,7 @@ def acquire(radar):
     print(f"Size: {destination.stat().st_size} bytes")
     print(f"Expected size: {EXPECTED_BYTES} bytes")
     print(f"SHA256: {destination_hash}")
+    print("Packet integrity: PASS")
     print(f"Saved to: {OUTPUT_DIR}")
 
     return destination
