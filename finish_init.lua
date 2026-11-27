@@ -27,7 +27,7 @@ ar1.CaptureCardConfig_EthInit(
 
 ar1.CaptureCardConfig_Mode(1, 2, 1, 2, 3, 30)
 
-ar1.CaptureCardConfig_PacketDelay(25)
+ar1.CaptureCardConfig_PacketDelay(50)
 
 RSTD.Sleep(1000)
 
