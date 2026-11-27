@@ -5,15 +5,15 @@ import hashlib
 from datetime import datetime
 from pathlib import Path
 
-from radar_session import RadarSession
-from packet_validator import validate_packets
-from radar_config import CONFIG
+from radar.radar_session import RadarSession
+from radar.packet_validator import validate_packets
+from radar.radar_config import CONFIG
 
 # ==========================================
 # Directories
 # ==========================================
 
-PROJECT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = Path(__file__).resolve().parents[1]
 
 POSTPROC_DIR = Path(
     r"C:\ti\mmwave_studio_02_01_01_00"

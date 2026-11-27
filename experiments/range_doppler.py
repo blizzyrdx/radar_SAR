@@ -7,21 +7,21 @@ from pathlib import Path
 # =====================================
 
 NUM_RX = 4
-NUM_SAMPLES = 512
+NUM_SAMPLES = 256
 NUM_CHIRPS = 128
 NUM_FRAMES = 8
 
 C = 299792458
 FC = 77e9
 FS = 10e6
-SLOPE = 60.012e12
-CHIRP_TIME = 165e-6
+SLOPE = 29.982e12
+CHIRP_TIME = 160e-6
 
 # =====================================
 # Read binary ADC data
 # =====================================
 
-file_path = Path(__file__).parent / "data" / "adc_high_bw_01.bin"
+file_path = Path(__file__).resolve().parents[1] / "data" / "adc_data.bin"
 
 raw = np.fromfile(file_path, dtype="<i2")
 

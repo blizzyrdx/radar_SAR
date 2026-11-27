@@ -6,9 +6,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from pathlib import Path
-from radar_config import CONFIG
+from radar.radar_config import CONFIG
 
-from radar_processing import (
+from radar.radar_processing import (
     load_adc,
     range_fft,
     coherent_profile
@@ -18,7 +18,7 @@ from radar_processing import (
 # Project directories
 # ==========================================
 
-PROJECT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = Path(__file__).resolve().parents[1]
 SCAN_DIR = PROJECT_DIR / "sar_scans"
 
 RX_CHANNEL = 0

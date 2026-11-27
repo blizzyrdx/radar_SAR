@@ -9,7 +9,7 @@ NUM_CHIRPS = 128
 NUM_FRAMES = 8
 
 # Locate the radar data file
-file_path = Path(__file__).parent / "data" / "adc_data.bin"
+file_path = Path(__file__).resolve().parents[1] / "data" / "adc_data.bin"
 
 # Read signed 16-bit ADC measurements
 raw_data = np.fromfile(file_path, dtype="<i2")

@@ -24,7 +24,7 @@ EXPECTED_VALUES = (
 
 EXPECTED_BYTES = EXPECTED_VALUES * 2
 
-PROJECT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = Path(__file__).resolve().parents[1]
 DATA_DIR = PROJECT_DIR / "acquisitions"
 
 # ==========================================

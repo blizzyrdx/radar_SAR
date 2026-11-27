@@ -6,13 +6,13 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 from datetime import datetime
 
-import sar_backprojection as bp
+from imaging import sar_backprojection as bp
 
 # ==========================================
 # Experiment configuration
 # ==========================================
 
-PROJECT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = Path(__file__).resolve().parents[1]
 
 RESULTS_DIR = PROJECT_DIR / "results" / "quality"
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)

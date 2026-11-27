@@ -5,9 +5,10 @@ import queue
 import time
 from pathlib import Path
 
-PROJECT_DIR = Path(__file__).resolve().parent
-BRIDGE = PROJECT_DIR / "rstd_persistent.ps1"
+PROJECT_DIR = Path(__file__).resolve().parents[1]
+from project_paths import POWERSHELL_DIR
 
+BRIDGE = POWERSHELL_DIR / "rstd_persistent.ps1"
 
 class RadarSession:
 

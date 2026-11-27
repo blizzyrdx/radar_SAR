@@ -4,15 +4,15 @@ import json
 from pathlib import Path
 from datetime import datetime
 
-from radar_config import CONFIG
-from radar_session import RadarSession
-from radar_acquisition import acquire
+from radar.radar_config import CONFIG
+from radar.radar_session import RadarSession
+from radar.radar_acquisition import acquire
 
 # ==========================================
 # Project directories
 # ==========================================
 
-PROJECT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = Path(__file__).resolve().parents[1]
 SCAN_DIR = PROJECT_DIR / "sar_scans"
 
 SCAN_DIR.mkdir(exist_ok=True)

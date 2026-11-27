@@ -17,7 +17,7 @@ NUM_SAMPLES = 512
 NUM_CHIRPS = 128
 NUM_FRAMES = 8
 
-DATA_DIR = Path(__file__).parent / "data"
+DATA_DIR = Path(__file__).resolve().parents[1] / "data"
 
 # ==========================================
 # Load and decode ADC data

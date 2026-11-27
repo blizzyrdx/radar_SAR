@@ -3,9 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from pathlib import Path
-from radar_config import CONFIG
+from radar.radar_config import CONFIG
 
-from radar_processing import (
+from radar.radar_processing import (
     C,
     FC,
     FS,
@@ -13,7 +13,7 @@ from radar_processing import (
     NUM_SAMPLES
 )
 
-from sar_dataset import (
+from imaging.sar_dataset import (
     load_dataset,
     latest_dataset
 )
@@ -22,7 +22,7 @@ from sar_dataset import (
 # Imaging configuration
 # ==========================================
 
-PROJECT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = Path(__file__).resolve().parents[1]
 
 RESULTS_DIR = PROJECT_DIR / "results" / "sar"
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)

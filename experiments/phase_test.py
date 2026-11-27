@@ -13,7 +13,7 @@ C = 299792458
 FS = 10e6
 SLOPE = 60.012e12
 
-DATA_DIR = Path(__file__).parent / "phase_test"
+DATA_DIR = Path(__file__).resolve().parents[1] / "phase_test"
 
 MIN_RANGE = 0.8
 MAX_RANGE = 2.5

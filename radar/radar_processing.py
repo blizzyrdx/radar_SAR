@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 import sys
 
 from pathlib import Path
-from packet_validator import validate_packets
-from radar_config import CONFIG
+from radar.packet_validator import validate_packets
+from radar.radar_config import CONFIG
 
 # ==========================================
 # Radar configuration
@@ -27,7 +27,7 @@ RANGE_RESOLUTION = CONFIG.range_resolution
 
 EXPECTED_BYTES = CONFIG.expected_bytes
 
-PROJECT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = Path(__file__).resolve().parents[1]
 DATA_DIR = PROJECT_DIR / "acquisitions"
 
 

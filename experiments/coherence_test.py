@@ -7,10 +7,10 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 from pathlib import Path
 
-from radar_session import RadarSession
-from radar_acquisition import acquire
+from radar.radar_session import RadarSession
+from radar.radar_acquisition import acquire
 
-from radar_processing import (
+from radar.radar_processing import (
     load_adc,
     range_fft,
     coherent_profile,
@@ -29,7 +29,7 @@ TARGET_RANGE_MAX = 1.4
 
 CAPTURE_DELAY = 3
 
-PROJECT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = Path(__file__).resolve().parents[1]
 
 RESULTS_DIR = PROJECT_DIR / "results" / "coherence"
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
