@@ -7,6 +7,7 @@ from pathlib import Path
 
 from radar_session import RadarSession
 from packet_validator import validate_packets
+from radar_config import CONFIG
 
 # ==========================================
 # Directories
@@ -26,15 +27,12 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 # Radar configuration
 # ==========================================
 
-NUM_RX = 4
-NUM_SAMPLES = 512
-NUM_CHIRPS = 128
-NUM_FRAMES = 8
+NUM_RX = CONFIG.num_rx
+NUM_SAMPLES = CONFIG.num_samples
+NUM_CHIRPS = CONFIG.num_chirps
+NUM_FRAMES = CONFIG.num_frames
 
-EXPECTED_BYTES = (
-    NUM_RX * NUM_SAMPLES *
-    NUM_CHIRPS * NUM_FRAMES * 4
-)
+EXPECTED_BYTES = CONFIG.expected_bytes
 
 # ==========================================
 # Verify captured file

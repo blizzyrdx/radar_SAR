@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from pathlib import Path
+from radar_config import CONFIG
 
 from radar_processing import (
     load_adc,
@@ -21,21 +22,21 @@ PROJECT_DIR = Path(__file__).resolve().parent
 SCAN_DIR = PROJECT_DIR / "sar_scans"
 
 RX_CHANNEL = 0
-NFFT = 2048
+NFFT = CONFIG.nfft
 
 # ==========================================
 # Expected radar configuration
 # ==========================================
 
 EXPECTED_CONFIG = {
-    "start_frequency_hz": 77e9,
-    "frequency_slope_hz_s": 60.012e12,
-    "sample_rate_hz": 10e6,
-    "adc_samples": 512,
-    "rx_channels": 4,
-    "tx_channels": 1,
-    "chirps_per_frame": 128,
-    "frames": 8
+    "start_frequency_hz": CONFIG.start_frequency_hz,
+    "frequency_slope_hz_s": CONFIG.slope_hz_s,
+    "sample_rate_hz": CONFIG.sample_rate_hz,
+    "adc_samples": CONFIG.num_samples,
+    "rx_channels": CONFIG.num_rx,
+    "tx_channels": CONFIG.num_tx,
+    "chirps_per_frame": CONFIG.num_chirps,
+    "frames": CONFIG.num_frames
 }
 
 

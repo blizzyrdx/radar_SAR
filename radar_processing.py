@@ -5,29 +5,27 @@ import sys
 
 from pathlib import Path
 from packet_validator import validate_packets
+from radar_config import CONFIG
 
 # ==========================================
 # Radar configuration
 # ==========================================
 
-NUM_RX = 4
-NUM_SAMPLES = 512
-NUM_CHIRPS = 128
-NUM_FRAMES = 8
+NUM_RX = CONFIG.num_rx
+NUM_SAMPLES = CONFIG.num_samples
+NUM_CHIRPS = CONFIG.num_chirps
+NUM_FRAMES = CONFIG.num_frames
 
-C = 299792458
-FC = 77e9
-FS = 10e6
-SLOPE = 60.012e12
+C = CONFIG.speed_of_light
+FC = CONFIG.start_frequency_hz
+FS = CONFIG.sample_rate_hz
+SLOPE = CONFIG.slope_hz_s
 
-WAVELENGTH = C / FC
-BANDWIDTH = SLOPE * NUM_SAMPLES / FS
-RANGE_RESOLUTION = C / (2 * BANDWIDTH)
+WAVELENGTH = CONFIG.wavelength
+BANDWIDTH = CONFIG.bandwidth
+RANGE_RESOLUTION = CONFIG.range_resolution
 
-EXPECTED_BYTES = (
-    NUM_FRAMES * NUM_CHIRPS *
-    NUM_RX * NUM_SAMPLES * 4
-)
+EXPECTED_BYTES = CONFIG.expected_bytes
 
 PROJECT_DIR = Path(__file__).resolve().parent
 DATA_DIR = PROJECT_DIR / "acquisitions"
@@ -96,8 +94,8 @@ def load_adc(path):
 # Complex range FFT
 # ==========================================
 
-def range_fft(cube, nfft=2048):
-
+def range_fft(cube, nfft=CONFIG.nfft):
+    
     if nfft < NUM_SAMPLES:
         raise ValueError("FFT length too small.")
 

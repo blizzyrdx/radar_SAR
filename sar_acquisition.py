@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 from datetime import datetime
 
+from radar_config import CONFIG
 from radar_session import RadarSession
 from radar_acquisition import acquire
 
@@ -21,16 +22,19 @@ SCAN_DIR.mkdir(exist_ok=True)
 # ==========================================
 
 RADAR_CONFIG = {
-    "start_frequency_hz": 77e9,
-    "frequency_slope_hz_s": 60.012e12,
-    "sample_rate_hz": 10e6,
-    "adc_samples": 512,
-    "rx_channels": 4,
-    "tx_channels": 1,
-    "chirps_per_frame": 128,
-    "frames": 8,
-    "frame_periodicity_ms": 40,
-    "packet_delay_us": 50
+    "start_frequency_hz": CONFIG.start_frequency_hz,
+    "frequency_slope_hz_s": CONFIG.slope_hz_s,
+    "sample_rate_hz": CONFIG.sample_rate_hz,
+    "adc_start_time_s": CONFIG.adc_start_time_s,
+    "adc_samples": CONFIG.num_samples,
+    "rx_channels": CONFIG.num_rx,
+    "tx_channels": CONFIG.num_tx,
+    "chirps_per_frame": CONFIG.num_chirps,
+    "frames": CONFIG.num_frames,
+    "frame_periodicity_ms": CONFIG.frame_periodicity_ms,
+    "packet_delay_us": CONFIG.packet_delay_us,
+    "adc_bits": CONFIG.adc_bits,
+    "nfft": CONFIG.nfft
 }
 
 

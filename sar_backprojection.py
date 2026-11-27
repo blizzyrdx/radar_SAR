@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from pathlib import Path
+from radar_config import CONFIG
 
 from radar_processing import (
     C,
@@ -26,17 +27,13 @@ PROJECT_DIR = Path(__file__).resolve().parent
 RESULTS_DIR = PROJECT_DIR / "results" / "sar"
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
-NFFT = 2048
+NFFT = CONFIG.nfft
 
-ADC_START_TIME = 6e-6
+ADC_START_TIME = CONFIG.adc_start_time_s
 
-# Effective frequency at center of ADC sampling
-F_CENTER = FC + SLOPE * (
-    ADC_START_TIME +
-    (NUM_SAMPLES - 1) / (2 * FS)
-)
+F_CENTER = CONFIG.center_frequency
 
-WAVELENGTH = C / F_CENTER
+WAVELENGTH = CONFIG.speed_of_light / F_CENTER
 
 X_MIN = -0.5
 X_MAX = 0.5
