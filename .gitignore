@@ -1,0 +1,17 @@
+# Raw radar recordings
+*.bin
+
+# Generated radar datasets
+acquisitions/
+batch_test/
+phase_test/
+sar_scans/
+results/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
