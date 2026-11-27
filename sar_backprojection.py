@@ -1,4 +1,3 @@
-
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
@@ -391,9 +390,9 @@ def visualize(dataset, x, y, image, label):
 
     # Figure 3: Reconstructed image
 
-    plt.figure(figsize=(8, 8))
+    fig, ax = plt.subplots(figsize=(8, 8))
 
-    plt.imshow(
+    im = ax.imshow(
         db,
         extent=[
             x[0] - PIXEL_SIZE / 2,
@@ -408,25 +407,17 @@ def visualize(dataset, x, y, image, label):
         vmax=0
     )
 
-    for tx, ty, amplitude in dataset.get(
-        "targets", []
-    ):
+    for tx, ty, amplitude in dataset.get("targets", []):
+        ax.scatter(tx, ty, marker="+", color="white", s=100)
 
-        plt.scatter(
-            tx,
-            ty,
-            marker="+",
-            color="white",
-            s=100
-        )
+    ax.set_title(f"SAR Reconstruction - {label}")
+    ax.set_xlabel("Cross-range (m)")
+    ax.set_ylabel("Forward distance (m)")
 
-    plt.title(f"SAR Reconstruction - {label}")
-    plt.xlabel("Cross-range (m)")
-    plt.ylabel("Forward distance (m)")
-    plt.colorbar(label="Relative amplitude (dB)")
-    plt.tight_layout()
+    fig.colorbar(im, ax=ax, label="Relative amplitude (dB)")
+    fig.tight_layout()
 
-    plt.savefig(
+    fig.savefig(
         RESULTS_DIR / f"{label}_image.png",
         dpi=200
     )
